@@ -1,0 +1,6 @@
+name: sp-recom
+channels:
+  - defaults
+dependencies:
+  - python=3.8
+prefix: /home/victor/miniconda3/envs/sp-recom
