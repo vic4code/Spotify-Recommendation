@@ -1,0 +1,26 @@
+# Ignore binary files
+*.bin
+
+# Ignore model checkpoints
+models/
+data/
+# **/results/
+
+# Ignore cached files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+**/*db*/
+**/db/
+**/checkpoint/
+
+
+# Ignore logs and other temporary files
+logs/
+*.log
+*.log.*
+*.tmp
+*.gguf
