@@ -8,6 +8,7 @@ data/
 
 # Ignore cached files
 __pycache__/
+*.cache
 *.pyc
 *.pyo
 *.pyd
@@ -24,3 +25,4 @@ logs/
 *.log.*
 *.tmp
 *.gguf
+
