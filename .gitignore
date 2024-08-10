@@ -17,6 +17,7 @@ __pycache__/
 **/*db*/
 **/db/
 **/checkpoint/
+**/lightning_logs/
 
 
 # Ignore logs and other temporary files

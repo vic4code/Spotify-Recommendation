@@ -1,8 +1,9 @@
 import json
-import spotipy
 import os
-from spotipy.oauth2 import SpotifyClientCredentials
 from typing import Any, Dict, List, Union
+
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
 
 
 def convert_to_type_structure(d: Any) -> Union[Dict[str, Any], str]:
@@ -35,41 +36,47 @@ def convert_to_type_structure(d: Any) -> Union[Dict[str, Any], str]:
     else:
         return type(d).__name__
 
-    
+
 if __name__ == "__main__":
 
     # Set credential
-    client_id = os.getenv('SPOTIPY_CLIENT_ID')
-    client_secret = os.getenv('SPOTIPY_CLIENT_SECRET')
+    client_id = os.getenv("SPOTIPY_CLIENT_ID")
+    client_secret = os.getenv("SPOTIPY_CLIENT_SECRET")
 
-    auth_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
+    auth_manager = SpotifyClientCredentials(
+        client_id=client_id, client_secret=client_secret
+    )
     sp = spotipy.Spotify(auth_manager=auth_manager)
 
     # Search for a track by track name and return the first result
-    track_name = 'Perfect Night'
-    results = sp.search(q=track_name, type='track', limit=1)
+    track_name = "Perfect Night"
+    results = sp.search(q=track_name, type="track", limit=1)
     track_type_structure = convert_to_type_structure(results)
-    formatted_track_type_structure = json.dumps(track_type_structure, indent=4, ensure_ascii=False)
+    formatted_track_type_structure = json.dumps(
+        track_type_structure, indent=4, ensure_ascii=False
+    )
     print("Track", formatted_track_type_structure)
 
-
     # Search the artist of the track
-    artist_id = results['tracks']['items'][0]['artists'][0]['id']
+    artist_id = results["tracks"]["items"][0]["artists"][0]["id"]
     artist = sp.artist(artist_id)
     artist_type_structure = convert_to_type_structure(artist)
-    formatted_artist_type_structure = json.dumps(artist_type_structure, indent=4, ensure_ascii=False)
+    formatted_artist_type_structure = json.dumps(
+        artist_type_structure, indent=4, ensure_ascii=False
+    )
     print("Artist", formatted_artist_type_structure)
-    
 
     # Search a playlist
-    username="11100022591"
-    playlist_name = '<3'
+    username = "11100022591"
+    playlist_name = "<3"
     playlists = sp.user_playlists(username)
     for playlist in playlists["items"]:
-        if playlist['name'] == playlist_name:
+        if playlist["name"] == playlist_name:
             playlist_type_structure = convert_to_type_structure(playlist)
-            formatted_playlist_type_structure = json.dumps(playlist_type_structure, indent=4, ensure_ascii=False)
+            formatted_playlist_type_structure = json.dumps(
+                playlist_type_structure, indent=4, ensure_ascii=False
+            )
             print("Playlist", formatted_playlist_type_structure)
             break
-        
+
     breakpoint()
