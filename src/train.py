@@ -1,32 +1,28 @@
 import lightning as L
 import torch
-from transformers import BertForSequenceClassification, BertTokenizer
+import yaml
 
-from data.dataset import TextClassificationData
+from models.MMCF import DAE
+from utils.dataset import MPDDataModule
 
 
-class LitTextClassification(L.LightningModule):
-    def __init__(self):
-        super().__init__()
-        self.model = BertForSequenceClassification.from_pretrained(
-            "bert-base-uncased"
-        ).train()
+def main(args):
 
-    def training_step(self, batch):
-        output = self.model(
-            input_ids=batch["input_ids"],
-            attention_mask=batch["attention_mask"],
-            labels=batch["label"],
-        )
-        self.log("train_loss", output.loss)
-        return output.loss
+    yaml_file = args.config_file
+    with open(yaml_file, "r") as f:
+        logger.info(f"Loading the config file in {os.path.abspath(f.name)}...")
+        config = yaml.load(f, Loader=yaml.Loader)
 
-    def configure_optimizers(self):
-        return torch.optim.Adam(self.model.parameters(), lr=1e-5)
+    model = DAE()
+    data = MPDDataModule()
+    trainer = L.Trainer(max_epochs=3)
+    trainer.fit(model, data)
 
 
 if __name__ == "__main__":
-    model = LitTextClassification()
-    data = TextClassificationData()
-    trainer = L.Trainer(max_epochs=3)
-    trainer.fit(model, data)
+
+    parser = ArgumentParser()
+    parser.add_argument("--config_file", default="configs/config.yaml")
+    args = parser.parse_args()
+
+    main(args)

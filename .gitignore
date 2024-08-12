@@ -1,9 +1,9 @@
 # Ignore binary files
 *.bin
 
-# Ignore model checkpoints
-models/
+# Ignore data
 data/
+
 # **/results/
 
 # Ignore cached files
