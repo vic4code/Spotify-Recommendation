@@ -235,3 +235,9 @@ pip install spotipy
 ```
 python src/data_prepare.py --datadir ./data/modeling --mpd_tr ./data/mpd_train --mpd_te ./data/mpd_test
 ```
+
+## Reference
+- https://huggingface.co/spaces/Abdelrhman-Elruby/Spotify-Recommendation-System
+- https://www.slideshare.net/slideshow/mmcf-multimodal-collaborative-filtering-for-automatic-playlist-conitnuation/119174964#3
+- https://github.com/hojinYang/spotify_recSys_challenge_2018
+- https://github.com/abdelrhmanelruby/Spotify-Recommendation-System
